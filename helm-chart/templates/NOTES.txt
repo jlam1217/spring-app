@@ -1,0 +1,29 @@
+=============================================================
+  Kubernetes Deployment Instructions — {{ .Chart.Name }}
+=============================================================
+
+Your {{ .Chart.Name }} {{ .Chart.Version }} deployment has been
+installed into the '{{ .Release.Namespace }}' namespace.
+
+To check the deployment status:
+
+    kubectl get -n {{ .Release.Namespace }} pods,svc,deploy
+
+To get the service URL (local NodePort):
+
+    kubectl -n {{ .Release.Namespace }} get svc {{ include "my-spring-app.fullname" . }}
+
+Then browse to:
+
+    http://localhost:{{ .Values.service.nodePort }}/health
+
+To upgrade to a new version:
+
+    helm upgrade {{ .Release.Name }} . \
+        --set image.tag=v2
+
+To uninstall:
+
+    helm uninstall {{ .Release.Name }}
+
+=============================================================
