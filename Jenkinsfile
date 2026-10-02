@@ -31,6 +31,11 @@ pipeline {
             steps {
                 sh 'mvn package -DskipTests'
             }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
         }
         stage('Build Docker Image') {
             steps {
